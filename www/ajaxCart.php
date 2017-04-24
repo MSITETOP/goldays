@@ -1,7 +1,4 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("GOLDAYS Ювелирные украшения по разумной цене!");
-?> 
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
 			<?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.small", "smal_basket2", Array(
 				"PATH_TO_BASKET" => "/basket/index.php",	// Страница корзины
 				"PATH_TO_ORDER" => "/personal/order.php",	// Страница оформления заказа
@@ -11,4 +8,3 @@ $APPLICATION->SetTitle("GOLDAYS Ювелирные украшения по ра�
 				),
 				false
 			);?>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

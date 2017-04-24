@@ -2985,7 +2985,7 @@ function ipg_add_cart(_this){
 		//$("#small_basket").html($(e).find("#small_basket").html());
 		//$(".basket_slider_r").html($(e).find(".basket_slider_r").html());
 		//$("#basket_form_container .buy_basket").click(function(){ipg_now_order(); return false;});
-
+        $.ajax({url: "/local/templates/GOLDAYS/components/bitrix/catalog/catalog/bitrix/catalog.element/new/ajax.php",success: function(e){console.log(e);}});
 	}});    
 };
 

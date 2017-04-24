@@ -1995,7 +1995,8 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
 	
 	select_item = offersCatalog[this.offerNum];
     
-    console.log(select_item);
+    
+    console.log(basketIPG, select_item);
 };
 
 window.JCCatalogElement.prototype.SearchOfferPropIndex = function(strPropID, strPropValue)

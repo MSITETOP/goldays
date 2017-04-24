@@ -1995,8 +1995,11 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
 	
 	select_item = offersCatalog[this.offerNum];
     
-    
-    console.log(basketIPG, select_item);
+	if(basketIPG[select_item.ID]) {
+		$(".not_basket").hide();
+		$(".in_basket").show();
+	}    
+    //console.log(basketIPG, select_item);
 };
 
 window.JCCatalogElement.prototype.SearchOfferPropIndex = function(strPropID, strPropValue)

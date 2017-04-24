@@ -48,3 +48,9 @@
 	),
 	false
 );?> 
+        <?$APPLICATION->IncludeComponent(
+            "ipg:order.confirm",
+            "",
+            Array(
+            )
+        );?> 

@@ -2002,7 +2002,8 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
 		$(".not_basket").show();
 		$(".in_basket").hide();        
     }    
-    //console.log(basketIPG, select_item);
+    console.log(select_item.ID);
+    console.log(basketIPG[select_item.ID]);
 };
 
 window.JCCatalogElement.prototype.SearchOfferPropIndex = function(strPropID, strPropValue)

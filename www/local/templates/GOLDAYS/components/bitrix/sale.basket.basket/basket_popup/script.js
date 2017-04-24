@@ -1,3 +1,13 @@
+	$('.close_basket').on('click', function(){
+			$('.slogan1').show();
+			$('.back_bt').show();
+			$('.new_bt').show();
+			$('.basket_r').css("left", "954px")
+			$('.basket_popup').removeClass("open");
+			$('.basket_popup').addClass("closes");
+			$('.basket_bt').removeClass("rotate");
+	});
+    
 BX.ready(function() {
 
 	var sku_props = BX.findChildren(BX('basket_items'), {tagName: 'li', className: 'sku_prop'}, true);

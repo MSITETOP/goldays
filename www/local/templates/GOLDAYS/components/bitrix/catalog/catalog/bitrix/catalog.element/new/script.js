@@ -1994,6 +1994,8 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
 		$(".item-for-weight").html("");
 	
 	select_item = offersCatalog[this.offerNum];
+    
+    console.log(select_item);
 };
 
 window.JCCatalogElement.prototype.SearchOfferPropIndex = function(strPropID, strPropValue)

@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+.button-black,
+.button-white,
+.category-select .select,
+.sidebar,
+.wrapper-item-slider,
+.card-complement-wrapper{
+	behavior:url(libraries/PIE.htc);}

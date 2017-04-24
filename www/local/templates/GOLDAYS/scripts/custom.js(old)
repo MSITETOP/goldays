@@ -1,0 +1,112 @@
+﻿$(document).ready(function(){
+//нестандартный скроллбар
+	$('.scrollable').each(function(){
+		$(this).jScrollPane({
+			showArrows: true,
+			verticalGutter: 0,
+			arrowButtonSpeed: 18,
+			trackClickSpeed: 54
+		});
+	});
+	
+//настройка слайдеров
+    $('.slider').each(function(){
+	    var next = $(this).siblings('.next');
+		var prev = $(this).siblings('.prev');
+		$(this).jCarouselLite({
+			btnNext: next,
+			btnPrev: prev,
+			visible: 3,
+			speed: 800,
+			circular: false
+			//auto:5000
+		});
+	});
+
+//карусель товаров в корзине
+    $('.slider-wrapper .delete').on('click', function(){
+		$(this).parents('li').hide(400, function(){
+			$(this).parents('.slider').jCarouselLite = null;
+			var next = $(this).parents('.slider').siblings('.next');
+			var prev = $(this).parents('.slider').siblings('.prev');
+			next.unbind('click');
+			prev.unbind('click');
+			$(this).remove();
+			$('.slider').jCarouselLite({
+				btnNext: next,
+				btnPrev: prev,
+				visible: 3,
+				speed: 800,
+				circular: false
+				//auto:5000
+			});
+		});
+	});
+
+	
+//слайдер с миниатюрами
+	$('.product .photosgallery-std').each(function(){
+		$(this).sliderkit({
+			auto:false,
+			mousewheel:false,
+			shownavitems:4
+		});
+	});
+	$('.product2 .photosgallery-std').each(function(){
+		$(this).sliderkit({
+			auto:false,
+			mousewheel:false,
+			shownavitems:3
+		});
+	});
+	
+//всплывающие окна
+	$('.pop-up').each(function(){
+		var hgt = ($(window).height()-$(this).outerHeight())/2;
+		if (hgt<0){hgt=$(window).scrollTop(); $(this).css('position','absolute');} else {hgt=hgt|0; $(this).css('position','fixed');};
+		$(this).css('top', hgt+'px');
+	});
+	$(window).resize(function(){
+		$('.pop-up').each(function(){
+			var hgt = ($(window).height()-$(this).outerHeight())/2;
+			if (hgt<0){hgt=$(window).scrollTop(); $(this).css('position','absolute');} else {hgt=hgt|0; $(this).css('position','fixed');};
+			$(this).css('top', hgt+'px');
+		});
+	});
+
+
+	$('.pop-up .close').on('click', function(){
+		$(this).parents('.pop-up').fadeOut(400).siblings('#overlay').fadeOut(400);
+	});
+	
+
+	$('#pok_f').on('click', function(){
+		$('#window-complements').fadeOut(400).show();
+		$('body').prepend("<div id='overlay' style='display: block;'></div>")	
+	});
+
+
+	$('#mod_form').on('click', function(){
+		$('#window-complements').fadeOut(400).hide();
+		$('#overlay').fadeOut(400).hide();
+	});
+
+
+
+	$('.open-sizes').on('click', function(){
+        iClickType = 1;
+		$('#size-select').fadeIn(400).siblings('#overlay').fadeIn(400);
+	});
+
+	$('.open-complements').on('click', function(){
+		$('#window-complements').fadeIn(400, function(){
+			$('.scrollable', this).jScrollPane({
+				showArrows: true,
+				verticalGutter: 0,
+				arrowButtonSpeed: 18,
+				trackClickSpeed: 54
+			});
+		}).siblings('#overlay').fadeIn(400);
+	});
+	
+});

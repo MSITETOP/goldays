@@ -1998,7 +1998,10 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
 	if(basketIPG[select_item.ID]) {
 		$(".not_basket").hide();
 		$(".in_basket").show();
-	}    
+	} else {
+		$(".not_basket").show();
+		$(".in_basket").hide();        
+    }    
     //console.log(basketIPG, select_item);
 };
 

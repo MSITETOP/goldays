@@ -2992,6 +2992,7 @@ function ipg_add_cart(_this){
 	$(".not_basket").hide();
 	$(".in_basket").show();
 	$.ajax({url: url,success: function(e){
+        basketIPG[select_item.ID] = 1111111;
 		$("#small_basket").html($(e).find("#small_basket").html());
 		$(".basket_slider_r").html($(e).find(".basket_slider_r").html());
 		//$("#basket_form_container .buy_basket").click(function(){ipg_now_order(); return false;});

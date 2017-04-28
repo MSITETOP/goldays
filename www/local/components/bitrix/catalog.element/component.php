@@ -876,7 +876,8 @@ if($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USER
 			{
 				$offersFilter = array(
 					'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-					'HIDE_NOT_AVAILABLE' => $arParams['HIDE_NOT_AVAILABLE']
+					'HIDE_NOT_AVAILABLE' => "Y",
+                    '>CATALOG_QUANTITY' => 0
 				);
 				if (!$arParams["USE_PRICE_COUNT"])
 				{
@@ -910,7 +911,8 @@ if($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USER
 					$arOffer['~SUBSCRIBE_URL'] = str_replace('#ID#', $arOffer["ID"], $arResult['~SUBSCRIBE_URL_TEMPLATE']);
 					$arOffer['SUBSCRIBE_URL'] = str_replace('#ID#', $arOffer["ID"], $arResult['SUBSCRIBE_URL_TEMPLATE']);
 
-					$arResult["OFFERS"][] = $arOffer;
+                    if($arOffer["CATALOG_QUANTITY"])
+                        $arResult["OFFERS"][] = $arOffer;
 				}
 				unset($arOffer);
 				unset($arOffers);
@@ -1296,3 +1298,4 @@ else
 {
 	return 0;
 }
+

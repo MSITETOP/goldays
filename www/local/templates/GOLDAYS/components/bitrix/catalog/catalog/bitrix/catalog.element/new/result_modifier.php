@@ -593,8 +593,5 @@ if ($arResult['MODULES']['currency'])
 	}
 }
 
-foreach($arResult["OFFERS"] as $key => $i){
-    if(!$i["CATALOG_QUANTITY"])
-        unset($arResult["OFFERS"][$key]);
-}
+
 ?>

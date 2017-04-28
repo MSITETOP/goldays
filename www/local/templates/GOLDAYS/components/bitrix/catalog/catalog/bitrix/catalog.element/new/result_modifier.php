@@ -593,4 +593,4 @@ if ($arResult['MODULES']['currency'])
 	}
 }
 ?>
-<pre><?print_r($arResult)?></pre>
+<pre><?print_r($arResult["OFFERS"])?></pre>

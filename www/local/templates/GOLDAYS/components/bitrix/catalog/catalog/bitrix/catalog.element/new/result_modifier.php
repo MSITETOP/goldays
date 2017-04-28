@@ -592,7 +592,9 @@ if ($arResult['MODULES']['currency'])
 		unset($currencyFormat, $currency, $currencyIterator);
 	}
 }
+
+foreach($arResult["OFFERS"] as $key => $i){
+    if(!$i["CATALOG_QUANTITY"])
+        unset($arResult["OFFERS"][$key]);
+}
 ?>
-<?foreach($arResult["OFFERS"] as $i){?>
-<pre><?print_r($i["CATALOG_QUANTITY"])?></pre>
-<?}?>

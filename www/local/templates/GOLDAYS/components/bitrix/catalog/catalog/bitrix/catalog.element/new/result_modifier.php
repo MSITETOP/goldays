@@ -593,4 +593,6 @@ if ($arResult['MODULES']['currency'])
 	}
 }
 ?>
-<pre><?print_r($arResult["OFFERS"])?></pre>
+<?foreach($arResult["OFFERS"] as $i){?>
+<pre><?print_r($i["CATALOG_QUANTITY"])?></pre>
+<?}?>

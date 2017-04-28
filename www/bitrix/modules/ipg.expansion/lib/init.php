@@ -181,7 +181,8 @@ Class Init
 
                 if (strlen($VALUE) == 0 || strlen($DESCRIPTION) == 0)
                     continue;
-
+                if ($DESCRIPTION == "Вес")
+                    continue;
                 self::PropertyAddUpdate($IBLOCK_ID, $ELEMENT_ID, $VALUE, $DESCRIPTION);
             }
         }

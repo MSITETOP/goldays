@@ -3027,6 +3027,7 @@ function ipg_now_order(){
             }); 
         } else {
             console.log("Кто то уже меряет");
+            loader.remove();
         }
 	  }
 	});

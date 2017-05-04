@@ -3004,18 +3004,29 @@ function ipg_now_order(){
 	var loader = $("<div />",{'class':'ipgloaderbuy'});
 	$("body").append(loader);
     
-	var data = "action=status&list[0][price]="+select_item.MIN_PRICE.DISCOUNT_VALUE+"&list[0][xmlid]="+select_item.XML_ID;
+	var data = "&list[0][price]="+select_item.MIN_PRICE.DISCOUNT_VALUE+"&list[0][xmlid]="+select_item.XML_ID;
 	$.ajax({
 	  type: "POST",
 	  url: "/bitrix/components/ipg/order.confirm/ajax.php",
-	  data: data,
+	  data: "action=status"+data,
+      dataType: 'json',
 	  success: function(data){
-		loader.remove();
-	    if(data=="true"){
-	      window.location.href = '/basket/complete.php';
-	    } else {
-			console.log("Ошибочка вышла");
-		}
+        console.log(data);
+        if(0) {
+            $.ajax({
+              type: "POST",
+              url: "/bitrix/components/ipg/order.confirm/ajax.php",
+              data: "action=order"+data,
+              success: function(data){
+                loader.remove();
+                if(data=="true"){
+                  window.location.href = '/basket/complete.php';
+                } else {
+                    console.log("Ошибочка вышла");
+                }
+              }
+            }); 
+        }        
 	  }
 	});
 };

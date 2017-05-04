@@ -3004,18 +3004,18 @@ function ipg_now_order(){
 	var loader = $("<div />",{'class':'ipgloaderbuy'});
 	$("body").append(loader);
     
-	var data = "&list[0][price]="+select_item.MIN_PRICE.DISCOUNT_VALUE+"&list[0][xmlid]="+select_item.XML_ID;
+	var data_val = "&list[0][price]="+select_item.MIN_PRICE.DISCOUNT_VALUE+"&list[0][xmlid]="+select_item.XML_ID;
 	$.ajax({
 	  type: "POST",
 	  url: "/bitrix/components/ipg/order.confirm/ajax.php",
-	  data: "action=status"+data,
+	  data: "action=status"+data_val,
       dataType: 'json',
 	  success: function(data){
         if(data[0]=="1") {
             $.ajax({
               type: "POST",
               url: "/bitrix/components/ipg/order.confirm/ajax.php",
-              data: "action=order"+data,
+              data: "action=order"+data_val,
               success: function(data){
                 loader.remove();
                 if(data=="true"){

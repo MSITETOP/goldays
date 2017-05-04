@@ -2004,6 +2004,7 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
     }    
     console.log(select_item.ID);
     console.log(basketIPG[select_item.ID]);
+    $("#error_msg").remove();
 };
 
 window.JCCatalogElement.prototype.SearchOfferPropIndex = function(strPropID, strPropValue)
@@ -3003,7 +3004,7 @@ function ipg_add_cart(_this){
 function ipg_now_order(){
 	var loader = $("<div />",{'class':'ipgloaderbuy'});
 	$("body").append(loader);
-    
+    $("#error_msg").remove();
 	var data_val = "&list[0][price]="+select_item.MIN_PRICE.DISCOUNT_VALUE+"&list[0][xmlid]="+select_item.XML_ID;
 	$.ajax({
 	  type: "POST",

@@ -3011,8 +3011,7 @@ function ipg_now_order(){
 	  data: "action=status"+data,
       dataType: 'json',
 	  success: function(data){
-        console.log(data);
-        if(0) {
+        if(data[0]=="1") {
             $.ajax({
               type: "POST",
               url: "/bitrix/components/ipg/order.confirm/ajax.php",
@@ -3026,7 +3025,9 @@ function ipg_now_order(){
                 }
               }
             }); 
-        }        
+        } else {
+            console.log("Кто то уже меряет");
+        }
 	  }
 	});
 };

@@ -493,7 +493,7 @@ $strAlt = (
 				<span class="item_buttons_counter_block" id="<? echo $arItemIDs['BASKET_ACTIONS']; ?>" style="display: <? echo ($canBuy ? '' : 'none'); ?>;">
 					<a href="javascript:void(0);"  onclick="ipg_add_cart($(this));" class="button button-black inline bx_big bx_bt_button bx_cart not_basket"><img src="<?=$templateFolder?>/images/icon-round-white-in-cart.png" alt=""><div class="big">Отложить изделие</div><div class="small">для примерки</div></a>
 					<a href="javascript:void(0);" style="display: none;" class="button button-black inline bx_big bx_bt_button bx_cart in_basket"><img src="<?=$templateFolder?>/images/icon-round-white-in-cart.png" alt="">Изделие в корзине</a>
-					<a href="javascript:void(0);" onclick="ipg_now_order();" class="button button-black inline button button-black inline"><img src="<?=$templateFolder?>/images/icon-round-white-try.png" alt="">Примерить сразу</a>
+					<a href="javascript:void(0);" onclick="ipg_now_order();" id="ipg_now_order" class="button button-black inline button button-black inline"><img src="<?=$templateFolder?>/images/icon-round-white-try.png" alt="">Примерить сразу</a>
 				</span>
 				<span id="<? echo $arItemIDs['NOT_AVAILABLE_MESS']; ?>" class="bx_notavailable" style="display: <? echo (!$canBuy ? '' : 'none'); ?>;"><? echo $notAvailableMessage; ?></span>
 		<?

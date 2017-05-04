@@ -3026,6 +3026,8 @@ function ipg_now_order(){
               }
             }); 
         } else {
+            var error_msg = $("<div />", {"class":"error_msg", "id":"error_msg","text":"В данный момент эти товары меряют. Обратитесь к продавцу."});
+            $("#ipg_now_order").before(error_msg);
             console.log("Кто то уже меряет");
             loader.remove();
         }

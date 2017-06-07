@@ -17,25 +17,32 @@
     </div>
 </script>
 
-<div id="popup-dx" style="display: none;    position: absolute;    top: 180px;    text-align: center;    width: 100%;    font-size: 20px;    color: red;">
+<div id="alpha"></div>
+<div id="popup-dx" style="display: none;">
     В данный момент эти товары меряют. Обратитесь к продавцу.
+    <div class="items">
+    </div>
+    <div class="clr"></div>
+    <a class="take-other" href="#">Примерить другие отложенные мной товары</a>
+    <a class="back" href="#">Назад</a>
 </div>
 <script>
     
 
     $(document).ready(function() {
-        $(document).off('click', '.try .button, .now-order');
         $(document).on('click', '.try .button, .now-order', function(e) {
-            console.log($(this));
       		var os = new OrderSync("<?=$arResult['AJAX_URL']?>", "#item-template");
-            
-            //console.log(os);
+		
+		console.log(os);
 		
             os.CheckAvailTovars2();
 
 
             e.preventDefault();
-            return false;
+        });
+        $("#popup-dx .back").on('click', function(e) {
+            $("#alpha,#popup-dx").hide(200);
+            e.preventDefault();
         });
     });
 </script>

@@ -1,3 +1,23 @@
+.basket_slider_r .del {
+    height: 278px;
+    width: 278px;
+    position: absolute;
+    z-index: 99;
+}
+.basket_slider_r .del::before, .basket_slider_r .del::after {
+position: absolute;
+left: 50%;
+content: ' ';
+height: 100%;
+width: 3px;
+background-color: red;
+}
+.basket_slider_r .del::before {
+transform: rotate(45deg);
+}
+.basket_slider_r .del::after {
+transform: rotate(-45deg);
+}
 .bx_ordercart .bx_sort_container{
 	margin-bottom:15px;
 	min-height:32px;

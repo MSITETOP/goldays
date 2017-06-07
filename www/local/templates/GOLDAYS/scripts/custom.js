@@ -11,6 +11,7 @@ function deleteBasketItem(id, th){
 		  	if(data.SUCCESS){
 				$('#small_basket').html(data.BASKET_HTML);
 				smallBasket3Count();
+                $("input[data-id='"+id+"']").remove();
 			}
 		  }
 		});

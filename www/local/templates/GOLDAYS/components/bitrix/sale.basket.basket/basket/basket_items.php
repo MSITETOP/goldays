@@ -516,7 +516,7 @@ if ($normalCount > 0):
 foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
     if ($arItem["DELAY"] == "N" && $arItem["CAN_BUY"] == "Y") {
         ?>
-        <input type="hidden" data-cart="y" data-price="<?=$arItem['PRICE']?>" data-img="<?=$arItem['DETAIL_PICTURE_SRC']?>" data-xmlid="<?=$arItem['PRODUCT_XML_ID']?>" data-name="<?=$arItem['NAME']?>" data-desc="" />
+        <input type="hidden" data-id="<?=$arItem['ID']?>" data-cart="y" data-price="<?=$arItem['PRICE']?>" data-img="<?=$arItem['DETAIL_PICTURE_SRC']?>" data-xmlid="<?=$arItem['PRODUCT_XML_ID']?>" data-name="<?=$arItem['NAME']?>" data-desc="" />
     <?
     }
 }

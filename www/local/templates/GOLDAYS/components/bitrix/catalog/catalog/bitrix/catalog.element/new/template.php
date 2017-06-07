@@ -798,6 +798,9 @@ $strAlt = (
 		?>	
 	</section>
 </div>
+<?if($arResult['IS_MIN_PRICE']===false){?>
+    <div class="min_price_is_reserved">Товар с наименьшей ценой сейчас находится на примерке</div>
+ <?}?>
 <?
 $basketItems = array();
 $dbBasketItems = CSaleBasket::GetList(

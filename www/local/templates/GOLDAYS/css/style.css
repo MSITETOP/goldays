@@ -2744,3 +2744,16 @@ height: 100%;
 .card-item .none {
 
 }
+
+.min_price_is_reserved {
+    position: abcolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    background: red;
+    font-size: 16px;
+}

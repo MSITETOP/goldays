@@ -61,7 +61,6 @@ if (is_array($_REQUEST['list'])) {
             $res = CIBlockElement::GetList(Array(), array("XML_ID"=>$arID), false, false, array("ID","XML_ID"));
             while($arFields = $res->GetNext()){
                 $r = array("PRODUCT_ID"=>$arFields["ID"], "QUANTITY_ADD"=>"1", "UNDO_RESERVATION"=>"N");
-                //file_put_contents("/home/bitrix/www/serv.log", print_r($r, true), FILE_APPEND);
                 CCatalogProductProvider::ReserveProduct($r);
             }
         }
@@ -70,7 +69,6 @@ if (is_array($_REQUEST['list'])) {
             $bRes = $bRes && $bRes;
         }
         $arResult = $bRes;
-
         if ($arResult && CModule::IncludeModule("sale")) {
             CSaleBasket::DeleteAll(CSaleBasket::GetBasketUserID());
         }

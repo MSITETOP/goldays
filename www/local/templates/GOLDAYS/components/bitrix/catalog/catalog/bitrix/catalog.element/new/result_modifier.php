@@ -262,7 +262,6 @@ else
 	$arResult['CATALOG_TYPE'] = 0;
 	$arResult['OFFERS'] = array();
 }
-
 if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 {
 	$boolSKUDisplayProps = false;
@@ -594,4 +593,23 @@ if ($arResult['MODULES']['currency'])
 }
 
 
+$res = CCatalogSKU::getOffersList($arResult['ID'], $arResult['IBLOCK_ID'], array("ACTIVE"=>"Y"), array("IBLOCK_ID","ID"));
+
+if(current($arResult['CAT_PRICES'])["ID"]):
+    foreach($res as $tp) {
+        foreach($tp as $k=>$i) {
+            $p = GetCatalogProductPrice($i["ID"], current($arResult['CAT_PRICES'])["ID"]);
+            if(!$minprice || $minprice>$p["PRICE"]) {
+                $minprice = $p["PRICE"];
+                $minpriceID = $p["PRODUCT_ID"];
+            }
+        }
+    }
+    $is_min_price = false;
+    foreach($arResult['OFFERS'] as $OFFERS) {
+        if($OFFERS["ID"] == $minpriceID)
+            $is_min_price = true;
+    }
+    $arResult['IS_MIN_PRICE'] = $is_min_price;
+endif;
 ?>

@@ -105,7 +105,6 @@ function OrderSync(sAjaxDir, template) {
         $("input[data-cart='y']").each(function() {
             var $this = $(this);
             arList.push({
-                id: $this.attr("data-id"),
                 xmlid: $this.attr("data-xmlid"),
                 price: $this.attr("data-price"),
                 name: $this.attr("data-name"),
@@ -139,6 +138,7 @@ function OrderSync(sAjaxDir, template) {
 
     this.SendAjax = function(params, callback) {
         var that = this;
+
         $.ajax({
             url: this.sAjaxDir + "/ajax.php",
             type: 'GET',
@@ -199,6 +199,7 @@ function OrderSync(sAjaxDir, template) {
         //console.log("Check result: ");
         if (this.debug)
             console.log(data);
+
         for (var i in me.arList) {
             me.arList[i].avail = data[i];
         }
@@ -226,15 +227,13 @@ function OrderSync(sAjaxDir, template) {
                 AvailExists = true;
                 continue;
             }
-            
-            $(".basket_slider_r .current_price_"+me.arList[i].id).siblings("img").before("<div class='del'></div>");
 
             params = me.arList[i];
-            //console.log(html);
+console.log(html);
             var html = oEJS.render(params);
             $("div.items").prepend(html);
         }
-        console.log();
+
         // Если хоть один товар доступен к заказу, то предлагаем примерку, иначе перейти в каталог
 
         if (AvailExists) {

@@ -1,8 +1,9 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
 <?
-$file_name = 'kkm.xml';
-if (file_exists($file_name)) {
-    $xml = json_decode(json_encode(simplexml_load_file($file_name)),TRUE);
+$file_xml = file_get_contents('php://input');
+if (file_exists($file_xml)) {
+    $xml = new SimpleXMLElement($file_xml);
+    $xml = json_decode(json_encode($xml),TRUE);
     foreach($xml["Товар"] as $item){
         $arXMLID[] = $item["Ид"];
         $arList[$item["Ид"]] = $item["Количество"];
@@ -14,7 +15,6 @@ if (file_exists($file_name)) {
             CCatalogProduct::Update($arFields["ID"],$r);
         }
     }
-    unlink($file_name);
     echo "success";
 } else {
     exit('Не удалось открыть файл kkm.xml');

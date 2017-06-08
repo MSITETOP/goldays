@@ -369,6 +369,7 @@ if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFE
 		$arNewOffers[$keyOffer] = $arOffer;
 	}
 	$arResult['OFFERS'] = $arNewOffers;
+    
 	$arResult['SHOW_OFFERS_PROPS'] = $boolSKUDisplayProps;
 
 	$arUsedFields = array();
@@ -394,9 +395,67 @@ if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFE
 			}
 		}
 	}
+    
 	$arResult['OFFERS_PROP'] = $arUsedFields;
 	$arResult['OFFERS_PROP_CODES'] = (!empty($arUsedFields) ? base64_encode(serialize(array_keys($arUsedFields))) : '');
 
+            foreach($arResult["OFFERS"] as $k => $offer) {
+                if(is_array($offer["TREE"])){
+                    $is_props = true;
+                    foreach($offer["TREE"] as $prop_val)
+                        $treeOffers[$prop_val][$k] = $offer;
+                } else {
+                    $is_props = false;
+                    $treeOffers[$k] = $offer;
+                }
+            }
+            if($is_props){
+                foreach($treeOffers as $kp => $offerProps){
+                    $removeOffers = array();
+                    foreach($offerProps as $k => $offer){
+                        if(!$min_price || $min_price > $offer["MIN_PRICE"]["DISCOUNT_VALUE"]) {
+                            $min_price = $offer["MIN_PRICE"]["DISCOUNT_VALUE"];
+                            $min_price_key = $k;
+                            $min_price_kp = $kp;
+                        }
+                        if($offer["CATALOG_QUANTITY"] < 1) {
+                            $removeOffers[]=$k;
+                        }
+                    }  
+                    if(count($removeOffers) != count($offerProps)){
+                        $is_del[$kp] = true;
+                        foreach($removeOffers as $key) {
+                            unset($arResult["OFFERS"][$key]);
+                        }
+                    }
+                }  
+                if(!$arResult["OFFERS"][$min_price_key] || !$is_del[$min_price_kp])
+                    $arResult['IS_MIN_PRICE'] = false;
+                else 
+                    $arResult['IS_MIN_PRICE'] = true;
+            } else {
+                foreach($treeOffers as $k => $offer){
+                    if(!$min_price || $min_price > $offer["MIN_PRICE"]["DISCOUNT_VALUE"]) {
+                        $min_price = $offer["MIN_PRICE"]["DISCOUNT_VALUE"];
+                        $min_price_key = $k;
+                    }
+                    if($offer["CATALOG_QUANTITY"] < 1) {
+                        $removeOffers[]=$k;
+                    }
+                }  
+                if(count($removeOffers) != count($arResult["OFFERS"])){
+                    $is_del = true;
+                    foreach($removeOffers as $key) {
+                        unset($arResult["OFFERS"][$key]);
+                    }
+                }
+                if(!$arResult["OFFERS"][$min_price_key] || !$is_del)
+                    $arResult['IS_MIN_PRICE'] = false;
+                else 
+                    $arResult['IS_MIN_PRICE'] = true;
+            }        
+    
+    
 	Collection::sortByColumn($arResult['OFFERS'], $arSortFields);
 
 	$offerSet = array();
@@ -591,25 +650,5 @@ if ($arResult['MODULES']['currency'])
 		unset($currencyFormat, $currency, $currencyIterator);
 	}
 }
-
-
-$res = CCatalogSKU::getOffersList($arResult['ID'], $arResult['IBLOCK_ID'], array("ACTIVE"=>"Y"), array("IBLOCK_ID","ID"));
-
-if(current($arResult['CAT_PRICES'])["ID"]):
-    foreach($res as $tp) {
-        foreach($tp as $k=>$i) {
-            $p = GetCatalogProductPrice($i["ID"], current($arResult['CAT_PRICES'])["ID"]);
-            if(!$minprice || $minprice>$p["PRICE"]) {
-                $minprice = $p["PRICE"];
-                $minpriceID = $p["PRODUCT_ID"];
-            }
-        }
-    }
-    $is_min_price = false;
-    foreach($arResult['OFFERS'] as $OFFERS) {
-        if($OFFERS["ID"] == $minpriceID)
-            $is_min_price = true;
-    }
-    $arResult['IS_MIN_PRICE'] = $is_min_price;
-endif;
 ?>
+

@@ -911,7 +911,7 @@ if($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USER
 					$arOffer['~SUBSCRIBE_URL'] = str_replace('#ID#', $arOffer["ID"], $arResult['~SUBSCRIBE_URL_TEMPLATE']);
 					$arOffer['SUBSCRIBE_URL'] = str_replace('#ID#', $arOffer["ID"], $arResult['SUBSCRIBE_URL_TEMPLATE']);
 
-                    if($arOffer["CATALOG_QUANTITY"])
+                    //if($arOffer["CATALOG_QUANTITY"]>0)
                         $arResult["OFFERS"][] = $arOffer;
 				}
 				unset($arOffer);

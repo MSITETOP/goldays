@@ -624,7 +624,11 @@ window.JCCatalogElement.prototype.Init = function()
 		$(".not_basket").hide();
 		$(".in_basket").show();
 	}
-
+    
+    if(select_item.CATALOG_QUANTITY > 0)
+        $(".bx_item_detail .item_buttons.vam").show();
+    else
+        $(".bx_item_detail .item_buttons.vam").hide();
 	
 	BX.bind(BX('sliderkit-go-next'), 'click', BX.delegate(this.SliderNextEl, this));
 	BX.bind(BX('sliderkit-go-prev'), 'click', BX.delegate(this.SliderPrevEl, this));
@@ -2002,9 +2006,13 @@ window.JCCatalogElement.prototype.SelectOfferProp = function()
 		$(".not_basket").show();
 		$(".in_basket").hide();        
     }    
-    console.log(select_item.ID);
-    console.log(basketIPG[select_item.ID]);
+
     $("#error_msg").remove();
+    
+    if(select_item.CATALOG_QUANTITY > 0)
+        $(".bx_item_detail .item_buttons.vam").show();
+    else
+        $(".bx_item_detail .item_buttons.vam").hide();
 };
 
 window.JCCatalogElement.prototype.SearchOfferPropIndex = function(strPropID, strPropValue)

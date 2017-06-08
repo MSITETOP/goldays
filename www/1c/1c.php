@@ -7,24 +7,22 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     если пользователь нажал кнопку Cancel';
     exit;
 } else {
-    echo "<p>Hello {$_SERVER['PHP_AUTH_USER']}.</p>";
-    echo "<p>Вы ввели пароль {$_SERVER['PHP_AUTH_PW']}.</p>";
-
-
+    $arAuthResult = $USER->Login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], "N", "Y");
 
     $file_xml = file_get_contents('php://input');
-    file_put_contents($_SERVER["DOCUMENT_ROOT"]."/1c.log", "==============\n".$file_xml."\n==============\n", FILE_APPEND);
-
     $xml = new SimpleXMLElement($file_xml);
-
     $xml = json_decode(json_encode($xml),TRUE);
 
+    if($xml["Товар"]["Ид"])
+	$xml["Товар"] = array($xml["Товар"]);
+
+    file_put_contents($_SERVER["DOCUMENT_ROOT"]."/1c.log", "==============\n".print_r($xml, true)."\n==============\n", FILE_APPEND);
     foreach($xml["Товар"] as $item){
         $arXMLID[] = $item["Ид"];
         $arList[$item["Ид"]] = $item["Количество"];
     }
 
-    if($arXMLID && CModule::IncludeModule("iblock") && CModule::IncludeModule("sale") && CModule::IncludeModule("catalog")) {     
+    if($arAuthResult==1 && $arXMLID && CModule::IncludeModule("iblock") && CModule::IncludeModule("sale") && CModule::IncludeModule("catalog")) {     
         $res = CIBlockElement::GetList(Array(), array("=XML_ID"=>$arXMLID), false, false, array("ID","XML_ID","NAME"));
         while($arFields = $res->GetNext()){
             $r = array("QUANTITY"=>$arList[$arFields["XML_ID"]], "QUANTITY_RESERVED" => "0");
@@ -32,6 +30,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
         }
 	echo "success";
     } else {
+        file_put_contents($_SERVER["DOCUMENT_ROOT"]."/1c.log", "==============\n".print_r($arAuthResult, true)."\n==============\n", FILE_APPEND);
 	echo "fail";
     }  
 }

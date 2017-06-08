@@ -5,7 +5,7 @@ Class SoapSync extends Soap
 {
     private $ar1CServers = array(
         array(
-            'IP' => '195.64.223.52',
+            'IP' => '192.168.0.100',
             'DB' => 'work'
         )
     );

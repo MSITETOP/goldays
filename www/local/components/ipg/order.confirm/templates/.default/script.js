@@ -138,6 +138,8 @@ function OrderSync(sAjaxDir, template) {
     };
 
     this.SendAjax = function(params, callback) {
+        var loader = $("<div />",{'class':'ipgloaderbuy'});
+        $("body").append(loader);   
         var that = this;
         $.ajax({
             url: this.sAjaxDir + "/ajax.php",
@@ -146,6 +148,7 @@ function OrderSync(sAjaxDir, template) {
             dataType: 'json',
             success: function(json) {
                 callback(json);
+                loader.remove();
             },
             error: function(e) {
                 if (that.debug)
